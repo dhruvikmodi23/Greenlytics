@@ -1,40 +1,33 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-
-
-const PrivateRoute = ({ children }) => {
-  const isAuthenticated = !!localStorage.getItem('authToken'); 
-  return isAuthenticated ? children : <Navigate to="/login" />;
-};
+import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
   return (
     <Router>
       <Routes>
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route 
-          path="/dashboard" 
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          } 
-        />
-        {/* Redirect from root based on authentication status */}
-        <Route 
-          path="/" 
-          element={
-            localStorage.getItem('authToken') 
-              ? <Navigate to="/dashboard" /> 
-              : <Navigate to="/login" />
-          } 
-        />
+
+        
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          
+        </Route>
+        
+        
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
