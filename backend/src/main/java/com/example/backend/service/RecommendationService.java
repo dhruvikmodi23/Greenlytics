@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Service
 public class RecommendationService {
-    // In a real app, these thresholds would be in a config file
+    
     private static final double HIGH_FOOTPRINT_THRESHOLD = 50.0; // kg CO2e
 
     public List<String> generateRecommendations(User user, DashboardDataResponse dashboardData) {
@@ -22,7 +22,7 @@ public class RecommendationService {
         Map<ActivityCategory, Double> breakdown = dashboardData.getCategoryBreakdown();
 
         // Find the category with the highest contribution
-        String highestCategory = breakdown.entrySet().stream()
+        ActivityCategory highestCategory = breakdown.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
@@ -38,16 +38,16 @@ public class RecommendationService {
         }
 
         switch (highestCategory) {
-            case "TRANSPORTATION":
+            case TRANSPORTATION:
                 recommendations.add("Your biggest impact is from transportation. Could you swap one car trip for a bus or train ride this week?");
                 break;
-            case "DIET":
+            case DIET:
                 recommendations.add("Diet is your main footprint source. Swapping one red meat meal for a vegetarian option can make a big difference.");
                 break;
-            case "ENERGY":
+            case ENERGY:
                 recommendations.add("Energy usage is your top category. Remember to unplug electronics when not in use to reduce your passive consumption.");
                 break;
-            case "SHOPPING":
+            case SHOPPING:
                 recommendations.add("Shopping contributes significantly to your footprint. Considering second-hand options for items like electronics or clothing can help.");
                 break;
         }
