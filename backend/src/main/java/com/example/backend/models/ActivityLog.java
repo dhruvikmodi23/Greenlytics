@@ -31,6 +31,9 @@ public class ActivityLog {
     @Field("value")
     private double value;
 
+    @Field("subtype")
+    private String subType;
+
     @Field("unit")
     private String unit;
 
