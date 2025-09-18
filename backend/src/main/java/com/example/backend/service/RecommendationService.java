@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Service
 public class RecommendationService {
-    
+
     private static final double HIGH_FOOTPRINT_THRESHOLD = 50.0; // kg CO2e
 
     public List<String> generateRecommendations(User user, DashboardDataResponse dashboardData) {

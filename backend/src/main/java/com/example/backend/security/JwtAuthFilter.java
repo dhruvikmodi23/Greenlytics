@@ -19,7 +19,14 @@ import java.io.IOException;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private UserDetailsImpl userDetailsService;
+    private final UserDetailsImpl userDetailsService;
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/api/auth/");
+    }
+
 
     @Override
     protected void doFilterInternal(

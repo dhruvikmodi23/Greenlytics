@@ -12,6 +12,6 @@ public interface ActivityLogRepository extends MongoRepository<ActivityLog,Strin
 
     List<ActivityLog> findByUserIdAndDateBetween(String userId, LocalDate startDate, LocalDate endDate);
 
-    List<ActivityLog> findByUsername(String username);
+
 
 }

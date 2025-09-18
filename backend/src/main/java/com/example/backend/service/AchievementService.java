@@ -47,7 +47,7 @@ public class AchievementService {
         }
 
         // Fetch all user activities to check for other achievements
-        List<ActivityLog> allActivities = activityLogRepository.findByUsername(user.getUsername());
+        List<ActivityLog> allActivities = activityLogRepository.findByuserId(user.getId());
 
         // 2. Green Commuter
         if (!user.getAchievements().contains(Achievement.GREEN_COMMUTER.name())) {
